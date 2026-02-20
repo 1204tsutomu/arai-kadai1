@@ -32,55 +32,67 @@
     text-align: center;
 }
 
-.form__group {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 15px;
-}
-
-.form__label--required {
-    margin-left: 5px;
-    padding: 4px 6px;
-    border-radius: 3px;
-    background: #fafafa;
-    color: #aaa;
-}
-
-.form__error {
-    height: 20px;
-    color: #ff0000;
+/* 1. ラベル側の幅をしっかり確保する */
+.form__group-title {
+    width: 30%;
+    /* 全体の3割をラベルに割り当て */
     text-align: left;
+    /* ラベルを左寄せに */
+    padding-top: 10px;
+    /* 入力欄との高さを合わせる微調整 */
 }
 
+/* 2. 入力エリア側の設定 */
+.form__group-content {
+    width: 70%;
+    /* 残りの7割を入力エリアに */
+    text-align: left;
+    /* エラーメッセージなども左寄せに */
+}
+
+/* 3. 入力要素の幅を「固定」から「レスポンシブ」に変更 */
 .form__input--text input,
 .form__input--textarea textarea {
     padding: 10px;
-    width: 600px;
+    width: 100%;
+    /* 600px固定ではなく、親要素(70%)に対して100%にする */
+    max-width: 600px;
+    /* 最大でも600pxまでに制限（これでお好みの幅を維持） */
     border: 1px solid #ddd;
     border-radius: 3px;
-
+    box-sizing: border-box;
+    /* パディングを含めた幅計算にする */
     appearance: none;
 }
 
-.form__input--text input {
-    height: 40px;
-}
-
-.form__input--textarea textarea {
-    height: 180px;
-}
-
-.form__button {
-    margin-top: 30px;
-}
-
-.form__button-submit {
-    padding: 10px;
-    width: 30%;
-    height: 50px;
-    border: none;
+/* 4. 「必須」ラベルが崩れないように（おまけ） */
+.form__label--required {
+    display: inline-block;
+    /* ブロック要素化して安定させる */
+    white-space: nowrap;
+    /* 絶対に改行させない */
+    margin-left: 5px;
+    padding: 2px 6px;
+    /* 少しスリムに */
     border-radius: 3px;
-    background: #000;
+    background: #ff0000;
+    /* せっかくなので「必須」っぽく赤にしても良いかも？ */
     color: #fff;
-    cursor: pointer;
+    /* 赤背景なら文字は白 */
+    font-size: 12px;
+}
+/* これを入れないと、せっかくの幅指定が効かずに縦に並んでしまいます */
+.form__group {
+    display: flex;
+    justify-content: space-between;
+    /* ラベルと入力を左右に振り分ける */
+    margin-bottom: 20px;
+    /* 行ごとの余白 */
+    align-items: flex-start;
+    /* ラベルと入力を上揃えにする */
+}
+
+/* ラベル内の「必須」を縦並びにしないためのダメ押し */
+.form__label-item {
+    display: inline-block;
 }
