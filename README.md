@@ -1,6 +1,6 @@
 ## アプリケーション名
 
-環境構築第一号
+問い合わせフォーム
 
 ## 環境構築
 
@@ -60,16 +60,19 @@ chmod -R 777 storage
 
 ## 使用技術(実行環境)
 
-ここにバージョンを記載
+```
 PHP：xxx
 Laravel：xxx
 MySQL：xxx
 Ngnix：xxx
+```
 
 ## URL
 
-ここにURLを記載
-トップページ：http://localhost/
+```
+問い合わせフォーム：http://localhost/
+管理画面：http://localhost/admin/
+```
 
 ## ER図
 
