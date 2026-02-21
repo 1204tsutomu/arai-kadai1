@@ -23,7 +23,7 @@
                 <h2>お問い合わせ</h2>
             </div>
 
-            <form class="form" action="/contacts/confirm" method="post">
+            <form class="form" action="{{ route('confirm') }}" method="post">
                 @csrf
 
                 <div class="form__group">
@@ -50,9 +50,9 @@
                     </div>
                     <div class="form__group-content">
                         <div class="form__input--radio">
-                            <label><input type="radio" name="gender" value="1" checked>男性</label>
-                            <label><input type="radio" name="gender" value="2">女性</label>
-                            <label><input type="radio" name="gender" value="3">その他</label>
+                            <label><input type="radio" name="gender" value="1" {{ old('gender', '1') == '1' ? 'checked' : '' }}>男性</label>
+                            <label><input type="radio" name="gender" value="2" {{ old('gender') == '2' ? 'checked' : '' }}>女性</label>
+                            <label><input type="radio" name="gender" value="3" {{ old('gender') == '3' ? 'checked' : '' }}>その他</label>
                         </div>
                         @error('gender') <p class="form__error">{{ $message }}</p> @enderror
                     </div>
@@ -83,9 +83,9 @@
                             <input type="tel" name="tel3" placeholder="5678" value="{{ old('tel3') }}" />
                         </div>
                         <div class="form__error">
-                            @error('tel1') <p>{{ $message }}</p> @enderror
-                            @error('tel2') <p>{{ $message }}</p> @enderror
-                            @error('tel3') <p>{{ $message }}</p> @enderror
+                            @if ($errors->has('tel1') || $errors->has('tel2') || $errors->has('tel3'))
+                            <strong>電話番号を入力してください</strong>
+                            @endif
                         </div>
                     </div>
                 </div>

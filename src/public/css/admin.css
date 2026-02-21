@@ -1,0 +1,164 @@
+/* =========================================
+   全体レイアウト
+   ========================================= */
+.admin__content {
+    width: 80%;
+    margin: 0 auto;
+    /* これで左寄りが直ります */
+}
+
+.admin__heading h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    /* 40pxから20pxへ短縮 */
+    text-align: center;
+    font-weight: normal;
+}
+
+/* =========================================
+   検索フォーム
+   ========================================= */
+.search-form {
+    display: flex;
+    justify-content: center;
+    /* 検索項目を中央寄せ */
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.search-form input,
+.search-form select {
+    border: 1px solid #e0dfde;
+    padding: 10px;
+    color: #ccc;
+    background: #fdfdfd;
+}
+
+.search-btn {
+    background: #8b7969;
+    color: #fff;
+    border: none;
+    padding: 10px 30px;
+    cursor: pointer;
+}
+
+.reset-btn {
+    background: #f4f4f4;
+    color: #d9d0c6;
+    border: none;
+    padding: 10px 30px;
+    cursor: pointer;
+}
+
+/* =========================================
+   サブナビゲーション (エクスポート & ページネーション)
+   ========================================= */
+.admin-sub__nav {
+    display: flex;
+    justify-content: space-between;
+    /* エクスポートを左、ページネーションを右に配置 */
+    align-items: flex-end;
+    /* 下揃えにしてテーブルに密着させる */
+    margin-bottom: 5px;
+    /* テーブルとの隙間 */
+    width: 100%;
+}
+
+.export-btn {
+    background: #f4f4f4;
+    color: #d9d0c6;
+    border: none;
+    padding: 5px 15px;
+    cursor: pointer;
+}
+
+/* =========================================
+   テーブル設定
+   ========================================= */
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0;
+}
+
+.admin-table__header {
+    background-color: #8b7969;
+    color: #fff;
+    text-align: left;
+    padding: 15px;
+}
+
+.admin-table__item {
+    padding: 8px 15px !important;
+    /* 上下余白を圧縮 */
+    border-bottom: 1px solid #f4f4f4;
+    color: #5d5d5d;
+    height: 38px !important;
+    /* 行の高さを固定 */
+    white-space: nowrap;
+}
+
+/* hover時に色を変える (FN021) */
+.admin-table__row:hover {
+    background-color: #f9f9f9;
+    transition: 0.3s;
+}
+
+.detail-btn {
+    background: transparent;
+    border: 1px solid #f4ece2;
+    color: #d9d0c6;
+    padding: 5px 15px;
+    cursor: pointer;
+}
+
+/* =========================================
+   ページネーション修正 (Tailwind強制上書き版)
+   ========================================= */
+.pagination {
+    margin: 0;
+}
+
+/* 不要な情報を隠す */
+.pagination nav div:first-child,
+.pagination nav p {
+    display: none !important;
+}
+
+/* 番号ボタンの親要素 */
+.pagination nav div:last-child {
+    display: flex !important;
+    /* これで横に並びます */
+}
+
+/* 数字ボタンのデザイン固定 */
+.pagination nav a,
+.pagination nav span {
+    padding: 0 !important;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 35px !important;
+    height: 35px !important;
+    min-width: 35px !important;
+    border: 1px solid #f4ece2 !important;
+    background-color: #fff !important;
+    color: #8b7969 !important;
+    text-decoration: none !important;
+    margin-left: -1px !important;
+    font-size: 14px !important;
+}
+
+/* アクティブ（現在地）の色 */
+.pagination nav span[aria-current="page"],
+.pagination nav span.bg-gray-100 {
+    background-color: #8b7969 !important;
+    color: #fff !important;
+    border-color: #8b7969 !important;
+}
+
+/* 矢印アイコン(SVG)の調整 */
+.pagination svg {
+    width: 16px !important;
+    height: 16px !important;
+}

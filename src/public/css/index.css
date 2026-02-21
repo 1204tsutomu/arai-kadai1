@@ -96,3 +96,15 @@
 .form__label-item {
     display: inline-block;
 }
+
+/* エラーメッセージを赤色にする */
+.form__error {
+    color: #ff0000;
+    /* 真っ赤 */
+    font-size: 0.8rem;
+    /* 少し小さめにして読みやすく */
+    margin-top: 5px;
+    /* 上に少し余白 */
+    display: block;
+    /* しっかり改行させる */
+}

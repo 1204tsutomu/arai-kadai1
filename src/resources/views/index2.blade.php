@@ -1,51 +1,71 @@
-@extends('layouts.app')
+@extends('layouts.app') {{-- レイアウトは共通のものを使用 --}}
 
 @section('css')
-<link rel="stylesheet" href="{{ asset('css/login.css') }}">
+<link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+<style>
+  /* 教材にあった矢印サイズ調整用CSS */
+  svg.w-5.h-5 {
+    width: 30px;
+    height: 30px;
+  }
+
+  /* テーブルの簡易スタイル */
+  .admin-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .admin-table th {
+    background-color: #8b7969;
+    /* スクショの色に近い茶系 */
+    color: white;
+    padding: 10px;
+  }
+
+  .admin-table td {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    text-align: center;
+  }
+</style>
 @endsection
 
 @section('content')
-<div class="login-form__content">
-  <div class="login-form__heading">
-    <h2>ログイン</h2>
+<div class="admin__content">
+  <div class="admin__heading">
+    <h2>Admin</h2>
   </div>
-  <form class="form">
-    <div class="form__group">
-      <div class="form__group-title">
-        <span class="form__label--item">メールアドレス</span>
-      </div>
-      <div class="form__group-content">
-        <div class="form__input--text">
-          <input type="email" name="email" value="{{ old('email') }}" />
-        </div>
-        <div class="form__error">
-          @error('email')
-          {{ $message }}
-          @enderror
-        </div>
-      </div>
-    </div>
-    <div class="form__group">
-      <div class="form__group-title">
-        <span class="form__label--item">パスワード</span>
-      </div>
-      <div class="form__group-content">
-        <div class="form__input--text">
-          <input type="password" name="password" />
-        </div>
-        <div class="form__error">
-          @error('password')
-          {{ $message }}
-          @enderror
-        </div>
-      </div>
-    </div>
-    <div class="form__button">
-      <button class="form__button-submit" type="submit">ログイン</button>
-    </div>
-  </form>
-  <div class="register__link">
-    <a class="register__button-submit" href="/register">会員登録の方はこちら</a>
+
+  {{-- 検索フォームなどはここに配置 --}}
+
+  <table class="admin-table">
+    <tr>
+      <th>お名前</th>
+      <th>性別</th>
+      <th>メールアドレス</th>
+      <th>お問い合わせの種類</th>
+      <th></th>
+    </tr>
+    @foreach ($contacts as $contact)
+    <tr>
+      <td>{{ $contact->first_name }}　{{ $contact->last_name }}</td>
+      <td>
+        @if($contact->gender == 1) 男性
+        @elseif($contact->gender == 2) 女性
+        @else その他 @endif
+      </td>
+      <td>{{ $contact->email }}</td>
+      <td>{{ $contact->category->content ?? '' }}</td>
+      <td>
+        <button class="detail-button">詳細</button>
+      </td>
+    </tr>
+    @endforeach
+  </table>
+
+  {{-- ページネーションリンク --}}
+  <div class="pagination">
+    {{ $contacts->links() }}
   </div>
 </div>
 @endsection
