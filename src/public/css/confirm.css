@@ -78,3 +78,23 @@
     color: #fff;
     cursor: pointer;
 }
+
+/* confirm.css に追加 */
+.form__button {
+    display: flex;
+    flex-direction: column;
+    /* 縦に並べる */
+    align-items: center;
+    /* 中央に寄せる */
+    gap: 10px;
+    /* 送信と修正の間のスキマ */
+    margin-top: 30px;
+}
+
+.form__button-back {
+    color: #000;
+    /* 文字を黒に */
+    text-decoration: underline;
+    /* 下線をつけてリンクだと分かりやすく */
+    font-size: 14px;
+}

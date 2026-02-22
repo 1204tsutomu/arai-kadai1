@@ -17,19 +17,7 @@ class ContactController extends Controller
     }
 
     // 2. 確認画面の表示
-    public function confirm(ContactRequest $request)
-    {
-        $contact = $request->all();
 
-        if (!isset($contact['building_name'])) {
-            $contact['building_name'] = '';
-        }
-
-        $category = Category::find($request->category_id);
-        $contact['category_content'] = $category ? $category->content : '';
-
-        return view('confirm', compact('contact'));
-    }
 
     // 3. 保存処理
     public function store(Request $request)
@@ -50,5 +38,32 @@ class ContactController extends Controller
         $categories = Category::all();
 
         return view('admin', compact('contacts', 'categories'));
+    }
+
+    // 2. 確認画面の表示
+    public function confirm(ContactRequest $request)
+    {
+        // --- ここで電話番号を合体させる ---
+        $tel = $request->tel1 . $request->tel2 . $request->tel3;
+
+        // 合体させた電話番号をリクエストデータに無理やりねじ込む
+        // これでバリデーション(ContactRequest)の "tel" 項目を通過できます
+        $request->merge(['tel' => $tel]);
+
+        // 再度バリデーションを実行（merge後のデータをチェックするため）
+        $request->validateResolved();
+        // --------------------------------
+
+        $contact = $request->all();
+
+        // 建物名のキー名をBladeと合わせておくとスムーズです
+        if (!isset($contact['building'])) {
+            $contact['building'] = '';
+        }
+
+        $category = Category::find($request->category_id);
+        $contact['category_content'] = $category ? $category->content : '';
+
+        return view('confirm', compact('contact'));
     }
 }

@@ -48,16 +48,27 @@
     </tr>
     @foreach ($contacts as $contact)
     <tr>
-      <td>{{ $contact->first_name }}　{{ $contact->last_name }}</td>
+      {{-- 1. お名前 --}}
+      <td>{{ $contact->first_name }} {{ $contact->last_name }}</td>
+
+      {{-- 2. 性別 --}}
       <td>
         @if($contact->gender == 1) 男性
         @elseif($contact->gender == 2) 女性
         @else その他 @endif
       </td>
+
+      {{-- 3. メールアドレス --}}
       <td>{{ $contact->email }}</td>
+
+      {{-- 4. お問い合わせの種類 --}}
       <td>{{ $contact->category->content ?? '' }}</td>
+
+      {{-- 5. 詳細ボタン（ここにリンクをまとめます） --}}
       <td>
-        <button class="detail-button">詳細</button>
+        <a href="/author/{{ $contact->id }}" style="text-decoration: none;">
+          <button class="detail-button">詳細</button>
+        </a>
       </td>
     </tr>
     @endforeach

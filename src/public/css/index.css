@@ -108,3 +108,61 @@
     display: block;
     /* しっかり改行させる */
 }
+/* 姓と名を横並びにする */
+.form__input--name {
+    display: flex;
+    justify-content: space-between;
+    /* 均等に配置 */
+    gap: 20px;
+    /* 入力欄の間の隙間 */
+}
+
+.form__input--name input {
+    width: 100%;
+    /* 親の幅(半分)に合わせる */
+}
+
+/* 種類セレクトボックスの幅を整える */
+.form__input--select select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background: #f4f4f4;
+    /* 仕様書に近いグレー */
+}
+/* 電話番号を横並びにする */
+.form__input--tel {
+    display: flex;
+    align-items: center;
+    /* ハイフンと入力欄の上下中央を合わせる */
+    gap: 10px;
+    /* ほどよい隙間 */
+}
+
+.form__input--tel input {
+    width: 100%;
+    /* 親要素の中で均等に広がる */
+    text-align: center;
+    /* 数字を真ん中に寄せる（仕様書風） */
+    padding: 10px;
+    border: 1px solid #ccc;
+    background: #f4f4f4;
+}
+
+/* ハイフンの見た目調整 */
+.form__input--tel span {
+    margin: 0 5px;
+    font-weight: bold;
+}
+
+/* クラスがなくても、form__group-content内のselect全てに適用 */
+.form__group-content select {
+    width: 100%;
+    max-width: 600px;
+    /* text inputと合わせると綺麗です */
+    padding: 10px;
+    border: 1px solid #ddd;
+    background: #f4f4f4;
+    border-radius: 3px;
+    cursor: pointer;
+}

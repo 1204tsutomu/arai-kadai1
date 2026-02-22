@@ -20,33 +20,35 @@
     <main>
         <div class="contact-form__content">
             <div class="contact-form__heading">
-                <h2>お問い合わせ</h2>
+                <h2>Fashionably Late</h2>
             </div>
 
             <form class="form" action="{{ route('confirm') }}" method="post">
                 @csrf
 
+                {{-- 1. お名前 --}}
                 <div class="form__group">
                     <div class="form__group-title">
                         <span class="form__label--item">お名前</span>
-                        <span class="form__label--required">必須</span>
+                        <span class="form__label--required">※</span>
                     </div>
                     <div class="form__group-content">
-                        <div class="form__input--text">
-                            <input type="text" name="first_name" placeholder="例: 山田" value="{{ old('first_name') }}" />
-                            <input type="text" name="last_name" placeholder="例: 太郎" value="{{ old('last_name') }}" />
+                        <div class="form__input--name" style="display: flex; gap: 20px;">
+                            <input type="text" name="last_name" placeholder="例: 山田" value="{{ old('last_name') }}" style="flex: 1;">
+                            <input type="text" name="first_name" placeholder="例: 太郎" value="{{ old('first_name') }}" style="flex: 1;">
                         </div>
                         <div class="form__error">
-                            @error('first_name') <p>{{ $message }}</p> @enderror
                             @error('last_name') <p>{{ $message }}</p> @enderror
+                            @error('first_name') <p>{{ $message }}</p> @enderror
                         </div>
                     </div>
                 </div>
 
+                {{-- 2. 性別 --}}
                 <div class="form__group">
                     <div class="form__group-title">
                         <span class="form__label--item">性別</span>
-                        <span class="form__label--required">必須</span>
+                        <span class="form__label--required">※</span>
                     </div>
                     <div class="form__group-content">
                         <div class="form__input--radio">
@@ -58,10 +60,11 @@
                     </div>
                 </div>
 
+                {{-- 3. メールアドレス --}}
                 <div class="form__group">
                     <div class="form__group-title">
                         <span class="form__label--item">メールアドレス</span>
-                        <span class="form__label--required">必須</span>
+                        <span class="form__label--required">※</span>
                     </div>
                     <div class="form__group-content">
                         <div class="form__input--text">
@@ -71,16 +74,17 @@
                     </div>
                 </div>
 
+                {{-- 4. 電話番号 --}}
                 <div class="form__group">
                     <div class="form__group-title">
                         <span class="form__label--item">電話番号</span>
-                        <span class="form__label--required">必須</span>
+                        <span class="form__label--required">※</span>
                     </div>
                     <div class="form__group-content">
-                        <div class="form__input--text">
-                            <input type="tel" name="tel1" placeholder="080" value="{{ old('tel1') }}" /> -
-                            <input type="tel" name="tel2" placeholder="1234" value="{{ old('tel2') }}" /> -
-                            <input type="tel" name="tel3" placeholder="5678" value="{{ old('tel3') }}" />
+                        <div class="form__input--tel" style="display: flex; align-items: center; gap: 10px;">
+                            <input type="tel" name="tel1" placeholder="080" value="{{ old('tel1') }}" style="width: 100px;" /> -
+                            <input type="tel" name="tel2" placeholder="1234" value="{{ old('tel2') }}" style="width: 100px;" /> -
+                            <input type="tel" name="tel3" placeholder="5678" value="{{ old('tel3') }}" style="width: 100px;" />
                         </div>
                         <div class="form__error">
                             @if ($errors->has('tel1') || $errors->has('tel2') || $errors->has('tel3'))
@@ -90,10 +94,11 @@
                     </div>
                 </div>
 
+                {{-- 5. 住所 --}}
                 <div class="form__group">
                     <div class="form__group-title">
                         <span class="form__label--item">住所</span>
-                        <span class="form__label--required">必須</span>
+                        <span class="form__label--required">※</span>
                     </div>
                     <div class="form__group-content">
                         <div class="form__input--text">
@@ -103,10 +108,24 @@
                     </div>
                 </div>
 
+                {{-- 5.5 建物名 (任意項目) --}}
+                <div class="form__group">
+                    <div class="form__group-title">
+                        <span class="form__label--item">建物名</span>
+                    </div>
+                    <div class="form__group-content">
+                        <div class="form__input--text">
+                            <input type="text" name="building" placeholder="例: 千駄ヶ谷マンション101" value="{{ old('building') }}" />
+                        </div>
+                        {{-- 任意項目なのでエラー表示は不要ですが、一応 old() は効かせておきます --}}
+                    </div>
+                </div>
+
+                {{-- 6. お問い合わせの種類 --}}
                 <div class="form__group">
                     <div class="form__group-title">
                         <span class="form__label--item">お問い合わせの種類</span>
-                        <span class="form__label--required">必須</span>
+                        <span class="form__label--required">※</span>
                     </div>
                     <div class="form__group-content">
                         <select name="category_id">
@@ -121,10 +140,11 @@
                     </div>
                 </div>
 
+                {{-- 7. お問い合わせ内容 --}}
                 <div class="form__group">
                     <div class="form__group-title">
                         <span class="form__label--item">お問い合わせ内容</span>
-                        <span class="form__label--required">必須</span>
+                        <span class="form__label--required">※</span>
                     </div>
                     <div class="form__group-content">
                         <div class="form__input--textarea">
@@ -135,7 +155,7 @@
                 </div>
 
                 <div class="form__button">
-                    <button class="form__button-submit" type="submit">送信</button>
+                    <button class="form__button-submit" type="submit">確認画面へ</button>
                 </div>
             </form>
         </div>
