@@ -1,5 +1,5 @@
 .header {
-    background: #000;
+    background: #000000;
 }
 
 .header__inner {
@@ -24,4 +24,60 @@
 .thanks__heading {
     margin-bottom: 40px;
     text-align: center;
+}
+
+/* ボタンのクラス名に合わせて調整してください */
+.thanks__button {
+    display: block;
+    margin: 0 auto;
+    padding: 10px 40px;
+    background-color: #8b7969;
+    /* スクリーンショットに近い茶色 */
+    color: #fff;
+    text-decoration: none;
+    width: fit-content;
+}
+
+/* 親要素に基準（ここから動かないでねという目印）を作る */
+.thanks__content {
+    position: relative;
+    height: 80vh;
+    /* 画面の高さの8割くらいを確保 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.thanks__heading h2 {
+    color: #8b7969;
+    /* 理想の茶色 */
+    font-size: 26px;
+    /* ←ここを 20px から 26px くらいにアップ！ */
+    font-weight: bold;
+    margin-bottom: 20px;
+    /* ボタンとの距離が近すぎる場合はここを調整 */
+    letter-spacing: 1px;
+    /* 文字の間隔を少し広げると読みやすくなります */
+}
+
+/* 擬似要素（::before）を使って、背景文字を生成する */
+.thanks__content::before {
+    content: "Thank you";
+    /* 出したい文字 */
+    position: absolute;
+    /* 自由な場所に配置 */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* ど真ん中に配置 */
+    font-size: 15vw;
+    /* 画面幅に合わせて巨大化 */
+    color: #f4f4f4;
+    /* 限りなく白に近いグレー */
+    font-weight: bold;
+    z-index: -1;
+    /* メインの文字よりも後ろへ */
+    white-space: nowrap;
+    /* 改行させない */
 }

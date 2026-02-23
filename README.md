@@ -1,13 +1,16 @@
 ## アプリケーション名
 
-確認テスト第一号
+# coachtech お問い合わせフォーム
 
 ## 環境構築
+
+```
 
 git cloneコマンドでリポジトリからダウンロード
 「.env.example」をコピーして「.env」を作成しDBの設定を変更
 
 cp .env.example .env
+```
 
 DB_CONNECTION=mysql
 DB_HOST=mysql
@@ -54,4 +57,5 @@ Nginx：1.2x.x
 トップページ：http://localhost/
 管理画面：http://localhost/admin
 
+## ER図
 ![ER図](ER.drawio.png)
