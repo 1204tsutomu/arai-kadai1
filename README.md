@@ -10,7 +10,7 @@ git cloneコマンドでリポジトリからダウンロード
 「.env.example」をコピーして「.env」を作成しDBの設定を変更
 
 cp .env.example .env
-```
+
 
 DB_CONNECTION=mysql
 DB_HOST=mysql
@@ -44,6 +44,7 @@ php artisan db:seed
 srcディレクトリにあるstorageディレクトリに権限を設定
 
 chmod -R 777 storage
+```
 
 ## 使用技術(実行環境)
 
@@ -58,4 +59,5 @@ Nginx：1.2x.x
 管理画面：http://localhost/admin
 
 ## ER図
+
 ![ER図](ER.drawio.png)
