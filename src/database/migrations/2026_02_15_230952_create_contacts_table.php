@@ -28,9 +28,7 @@ class CreateContactsTable extends Migration
             $table->string('email');
 
             // 電話番号は3つに分ける（5桁ずつ入るように）
-            $table->string('tel1');
-            $table->string('tel2');
-            $table->string('tel3');
+            $table->string('tel');
 
             $table->string('address');
             $table->string('building_name')->nullable(); // 建物名は任意

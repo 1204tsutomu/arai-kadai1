@@ -26,9 +26,7 @@ class ContactFactory extends Factory
             'email' => $this->faker->safeEmail,
 
             // 電話番号を3分割（例: 090-1234-5678）
-            'tel1' => $this->faker->numerify('###'),
-            'tel2' => $this->faker->numerify('####'),
-            'tel3' => $this->faker->numerify('####'),
+            'tel' => $this->faker->numerify('###########'),
 
             'address' => $this->faker->address,
             'building_name' => $this->faker->secondaryAddress, // 建物名（任意）
