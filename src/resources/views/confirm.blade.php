@@ -88,16 +88,17 @@
                             </td>
                         </tr>
                     </table>
-                </div>
+                </div> {{-- confirm-tableの閉じ --}}
+
                 <div class="form__button">
-                    {{-- 送信ボタンは1つだけにします --}}
+                    {{-- 送信ボタン --}}
                     <button class="form__button-submit" type="submit">送信</button>
 
-                    {{-- 修正ボタン（デザインを当てるためにaタグのままが良いです） --}}
+                    {{-- 修正ボタン --}}
                     <a class="form__button-back" href="javascript:history.back();">修正</a>
                 </div>
-            </form>
-        </div>
+            </form> {{-- formをここで閉じる（重要！） --}}
+        </div> {{-- confirm__contentの閉じ --}}
     </main>
 </body>
 

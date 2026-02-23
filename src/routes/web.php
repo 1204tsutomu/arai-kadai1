@@ -5,19 +5,21 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AuthorController;
 
-Route::get('/author/{author}', [AuthorController::class, 'bind']);
-Route::get('/find', [AuthorController::class, 'find']);
-Route::post('/find', [AuthorController::class, 'search']);
+// --- 修正後のイメージ ---
 
-// --- routes/web.php ---
+// 【追加】お問い合わせ関連（ログイン不要なのでグループの外！）
+Route::get('/', [ContactController::class, 'index'])->name('contact.index');
+Route::post('/confirm', [ContactController::class, 'confirm'])->name('confirm');
+Route::post('/store', [ContactController::class, 'store'])->name('store');
 
-// 既存の他のルート（入力画面や確認画面など）はこの上に残したままでOKです
+// 中略（他のルートなど）
 
-// ユーザー認証が必要なルートをグループにまとめます
+// 認証が必要なグループ
 Route::middleware('auth')->group(function () {
+    // ここに /author/{author} や /find が残っていればOKです
     Route::get('/author/{author}', [AuthorController::class, 'bind']);
     Route::get('/find', [AuthorController::class, 'find']);
     Route::post('/find', [AuthorController::class, 'search']);
-    Route::get('/admin', [AuthorController::class, 'index']);
-    Route::get('/authors', [AuthorController::class, 'index']);
+
+    // その他、認証が必要なルートたち...
 });
