@@ -9,23 +9,15 @@ Route::get('/author/{author}', [AuthorController::class, 'bind']);
 Route::get('/find', [AuthorController::class, 'find']);
 Route::post('/find', [AuthorController::class, 'search']);
 
-// 1. お問い合わせ入力画面
-Route::get('/', [ContactController::class, 'index'])->name('contact.index');
+// --- routes/web.php ---
 
-// 2. 確認画面へ進む（URLから contacts/ を削る）
-Route::post('/confirm', [ContactController::class, 'confirm'])->name('confirm');
+// 既存の他のルート（入力画面や確認画面など）はこの上に残したままでOKです
 
-// 3. 完了画面へ（ここも URLから contacts/ を削る）
-Route::post('/store', [ContactController::class, 'store'])->name('store');
-
-// 4. 登録画面
-Route::get('/register', [AuthController::class, 'showRegister']);
-
-// Route::get('/admin', [ContactController::class, 'admin'])->name('admin');
-Route::get('/admin', [AuthorController::class, 'index']);
-// --- 管理ページ ---
-Route::get('/authors', [AuthorController::class, 'index']);
+// ユーザー認証が必要なルートをグループにまとめます
 Route::middleware('auth')->group(function () {
-    // AuthController::index2 から ContactController::admin へ変更
-
+    Route::get('/author/{author}', [AuthorController::class, 'bind']);
+    Route::get('/find', [AuthorController::class, 'find']);
+    Route::post('/find', [AuthorController::class, 'search']);
+    Route::get('/admin', [AuthorController::class, 'index']);
+    Route::get('/authors', [AuthorController::class, 'index']);
 });

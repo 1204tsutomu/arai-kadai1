@@ -14,7 +14,7 @@
     <header class="header">
         <div class="header__inner">
             <a class="header__logo" href="/">
-                Contact Form
+                Fashionably Late
             </a>
         </div>
     </header>
@@ -22,7 +22,7 @@
     <main>
         <div class="confirm__content">
             <div class="confirm__heading">
-                <h2>お問い合わせ内容確認</h2>
+                <h2>confirm</h2>
             </div>
             <form class="form" action="{{ route('store') }}" method="post">
                 @csrf

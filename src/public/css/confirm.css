@@ -1,100 +1,96 @@
+/* 1. ページ全体 */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    background-color: #fff;
+}
+
+/* 2. ロゴをセンターに */
 .header {
-    background: #000;
+    background-color: #fff;
+    padding: 30px 0;
+    border-bottom: 1px solid #eee;
 }
 
 .header__inner {
-    margin: 0 auto;
-    padding: 20px 15px;
-    max-width: 1230px;
+    display: flex;
+    justify-content: center;
 }
 
 .header__logo {
-    color: #fff;
+    color: #8b7d6b;
     text-decoration: none;
-    font-weight: bold;
-    font-size: 24px;
+    font-size: 32px;
+    font-weight: normal;
 }
 
-.confirm__content {
-    margin: 0 auto;
-    padding: 30px 15px;
-    max-width: 1230px;
-}
-
+/* 3. 【最重要】confirmをセンターに */
 .confirm__heading {
-    margin-bottom: 40px;
+    width: 100%;
     text-align: center;
+    /* これで中のh2が真ん中に来ます */
+    margin: 50px 0;
 }
 
-.form {
-    margin: 0 auto;
-    width: 70%;
+.confirm__heading h2 {
+    color: #8b7d6b;
+    font-size: 26px;
+    font-weight: normal;
+    display: inline-block;
 }
 
+/* 4. テーブルをセンターに */
 .confirm-table {
-    border: 1px solid #ddd;
+    margin: 0 auto;
+    width: 80%;
+    max-width: 850px;
 }
 
 .confirm-table__inner {
     width: 100%;
+    border-collapse: collapse;
 }
 
+/* ベージュの左列 */
 .confirm-table__header {
-    padding: 15px;
-    width: 20%;
-    border-bottom: 1px solid #ddd;
-    background-color: #eee;
-    font-weight: bold;
+    background-color: #bfa694;
+    color: #fff;
+    width: 30%;
+    padding: 20px;
+    text-align: left;
+    font-weight: normal;
+    border: 1px solid #fff;
 }
 
+/* 白の右列 */
 .confirm-table__text {
-    padding: 15px;
-    border-bottom: 1px solid #ddd;
+    padding: 20px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+    background-color: #fff;
 }
 
-.confirm-table__text input {
-    width: 100%;
-    outline: none;
-    border: none;
-}
-
-.confirm-table__row:last-child .confirm-table__header,
-.confirm-table__row:last-child .confirm-table__text {
-    border-bottom-width: 0;
-}
-
+/* 5. ボタンをセンターに */
 .form__button {
-    margin-top: 30px;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    margin: 50px 0;
 }
 
 .form__button-submit {
-    padding: 10px;
-    width: 30%;
-    height: 50px;
-    border: none;
-    border-radius: 3px;
-    background: #000;
+    background-color: #8b7d6b;
     color: #fff;
+    padding: 10px 60px;
+    border: none;
     cursor: pointer;
-}
-
-/* confirm.css に追加 */
-.form__button {
-    display: flex;
-    flex-direction: column;
-    /* 縦に並べる */
-    align-items: center;
-    /* 中央に寄せる */
-    gap: 10px;
-    /* 送信と修正の間のスキマ */
-    margin-top: 30px;
+    font-size: 16px;
 }
 
 .form__button-back {
-    color: #000;
-    /* 文字を黒に */
+    color: #8b7d6b;
     text-decoration: underline;
-    /* 下線をつけてリンクだと分かりやすく */
-    font-size: 14px;
+    font-size: 16px;
 }
