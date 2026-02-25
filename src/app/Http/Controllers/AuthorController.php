@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Author;
+use App\Models\Contact;
 
 class AuthorController extends Controller
 {
@@ -15,8 +16,9 @@ class AuthorController extends Controller
     // AuthorController.php の index メソッドを以下のように修正
     public function index(Request $request)
     {
-        // 検索クエリの開始
-        $query = Author::query();
+        // 2. Author::query() を Contact::with('category') に変更
+        // with('category') を入れることで「種類」のデータを一緒に持ってきます
+        $query = Contact::with('category');
 
         // 1. 名前またはメールアドレスで検索
         if ($request->filled('keyword')) {

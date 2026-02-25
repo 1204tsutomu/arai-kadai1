@@ -14,7 +14,7 @@ class ContactFactory extends Factory
     {
         return [
             // categoriesテーブルのIDをランダムに割り当て
-            'category_id' => Category::inRandomOrder()->first()->id,
+            'category_id' => $this->faker->numberBetween(1, 5),
 
             // 名前を姓と名に分けて生成
             'last_name' => $this->faker->lastName,

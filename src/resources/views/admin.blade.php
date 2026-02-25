@@ -72,27 +72,23 @@
 
     <div class="admin-sub__nav">
         <button class="export-btn">エクスポート</button>
+        {{-- 指摘２：重複を削除し、検索条件を維持するコードのみ残す --}}
         <div class="pagination">
-            {{ $contacts->links() }}
-        </div>
-        <div class="pagination">
-            {{-- appends(request()->query()) を付けることで、検索条件を維持したままページ移動できます --}}
             {{ $contacts->appends(request()->query())->links() }}
         </div>
     </div>
 
     <table class="admin-table">
         <tr class="admin-table__row">
-            {{-- 左端にリンクを配置 --}}
+            {{-- 指摘３：詳細はすでに一番左なのでそのまま、項目名だけ修正 --}}
             <th class="admin-table__header">詳細</th>
             <th class="admin-table__header">お名前</th>
             <th class="admin-table__header">性別</th>
             <th class="admin-table__header">メールアドレス</th>
-            <th class="admin-table__header">種類</th>
+            <th class="admin-table__header">お問い合わせの種類</th>
         </tr>
         @foreach ($contacts as $contact)
         <tr class="admin-table__row">
-            {{-- 青い文字の直接リンク --}}
             <td class="admin-table__item">
                 <a href="/author/{{ $contact->id }}" class="detail-link">
                     [表示]
@@ -105,6 +101,7 @@
                 @else その他 @endif
             </td>
             <td class="admin-table__item">{{ $contact->email }}</td>
+            {{-- 指摘１：Factoryを修正済みならこれで正しい名前が出ます --}}
             <td class="admin-table__item">{{ $contact->category->content ?? '不明' }}</td>
         </tr>
         @endforeach
