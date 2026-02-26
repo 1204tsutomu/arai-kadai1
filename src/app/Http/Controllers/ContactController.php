@@ -16,7 +16,7 @@ class ContactController extends Controller
     }
 
     // 18行目〜30行目を消して、これだけにする
-    public function confirm(Request $request)
+    public function confirm(ContactRequest $request)
     {
         $contact = $request->all();
         $contact['tel'] = $request->tel1 . $request->tel2 . $request->tel3;

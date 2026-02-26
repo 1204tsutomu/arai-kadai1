@@ -162,3 +162,30 @@
     width: 16px !important;
     height: 16px !important;
 }
+
+.header {
+    background-color: #ffffff;
+    /* 背景を白に修正 */
+    border-bottom: 1px solid #e0dfde;
+    /* 見本のような薄い区切り線を追加 */
+    padding: 20px 0;
+}
+
+.header__logo {
+    color: #8b7969;
+    /* 見本のベージュ系の文字色に変更 */
+    text-decoration: none;
+    font-family: 'Playfair Display', serif;
+    /* もし似たフォントがあれば指定 */
+    font-size: 26px;
+    font-weight: normal;
+}
+
+/* ナビゲーション（マイページ、ログアウト）の文字色も調整 */
+.header-nav__link {
+    color: #8b7969;
+    text-decoration: none;
+    border: 1px solid #e0dfde;
+    padding: 5px 15px;
+    font-size: 14px;
+}

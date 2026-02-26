@@ -3,29 +3,88 @@
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
 <style>
-    /* テーブル全体を最前面に引っ張り出す */
-    .admin__content {
-        position: relative;
-        z-index: 1;
-        margin-top: 20px;
+    /* テーブルの各列の幅を、現在の順番に合わせて再定義 */
+    .admin__table th:nth-child(1),
+    .admin__table td:nth-child(1) {
+        width: 10%;
     }
 
-    .admin-table {
-        position: relative;
-        z-index: 10;
+    /* 詳細 */
+    .admin__table th:nth-child(2),
+    .admin__table td:nth-child(2) {
+        width: 20%;
+    }
+
+    /* お名前 */
+    .admin__table th:nth-child(3),
+    .admin__table td:nth-child(3) {
+        width: 10%;
+    }
+
+    /* 性別 */
+    .admin__table th:nth-child(4),
+    .admin__table td:nth-child(4) {
+        width: 30%;
+    }
+
+    /* メールアドレス */
+    .admin__table th:nth-child(5),
+    .admin__table td:nth-child(5) {
+        width: 30%;
+    }
+
+    /* お問い合わせの種類 */
+
+    /* テキストが重ならないように調整 */
+    .admin__table th,
+    .admin__table td {
+        text-align: left;
+        padding: 15px 10px;
+        white-space: nowrap;
+        /* 改行を防ぐ */
+    }
+
+    /* 「詳細」ボタンのスタイルを整える */
+    .admin__detail-btn {
+        background: #f4f4f4;
+        border: 1px solid #ccc;
+        padding: 5px 10px;
+        text-decoration: none;
+        color: #8b7969;
+        /* 元のデザインに近い色 */
+        border-radius: 2px;
+    }
+
+    /* テーブルの横幅を固定せず、コンテンツに合わせるか均等にする */
+    .admin__table {
         width: 100%;
         border-collapse: collapse;
+        margin-top: 20px;
+        table-layout: auto;
+        /* コンテンツ量に合わせて自動調整 */
     }
 
-    /* リンクを確実にクリック可能にする設定 */
-    .detail-link {
-        color: blue !important;
-        text-decoration: underline !important;
-        font-weight: bold;
-        cursor: pointer !important;
-        display: block;
-        /* クリックエリアを広げる */
-        padding: 10px;
+    .admin__label,
+    .admin__data {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid #eee;
+        /* 見本に近い区切り線 */
+    }
+
+    /* 詳細ボタンを見本のスタイル（薄い枠線）に寄せる */
+    .admin__detail-btn {
+        display: inline-block;
+        padding: 5px 15px;
+        background-color: #fff;
+        border: 1px solid #e0dfde;
+        color: #8b7969;
+        text-decoration: none;
+        font-size: 14px;
+    }
+
+    .admin__detail-btn:hover {
+        background-color: #f8f8f8;
     }
 </style>
 @endsection
@@ -78,31 +137,33 @@
         </div>
     </div>
 
-    <table class="admin-table">
+    <table class="admin-table"> {{-- admin__table から admin-table へ修正 --}}
         <tr class="admin-table__row">
-            {{-- 指摘３：詳細はすでに一番左なのでそのまま、項目名だけ修正 --}}
-            <th class="admin-table__header">詳細</th>
             <th class="admin-table__header">お名前</th>
             <th class="admin-table__header">性別</th>
             <th class="admin-table__header">メールアドレス</th>
             <th class="admin-table__header">お問い合わせの種類</th>
+            <th class="admin-table__header"></th>
         </tr>
+
         @foreach ($contacts as $contact)
-        <tr class="admin-table__row">
-            <td class="admin-table__item">
-                <a href="/author/{{ $contact->id }}" class="detail-link">
-                    [表示]
-                </a>
+        <tr class="admin__row">
+            <td class="admin__data">
+                {{ $contact->last_name }}　{{ $contact->first_name }}
             </td>
-            <td class="admin-table__item">{{ $contact->last_name }} {{ $contact->first_name }}</td>
-            <td class="admin-table__item">
-                @if($contact->gender == 1) 男性
-                @elseif($contact->gender == 2) 女性
-                @else その他 @endif
+            <td class="admin__data">
+                {{ $contact->gender == 1 ? '男性' : ($contact->gender == 2 ? '女性' : 'その他') }}
             </td>
-            <td class="admin-table__item">{{ $contact->email }}</td>
-            {{-- 指摘１：Factoryを修正済みならこれで正しい名前が出ます --}}
-            <td class="admin-table__item">{{ $contact->category->content ?? '不明' }}</td>
+            <td class="admin__data">
+                {{ $contact->email }}
+            </td>
+            <td class="admin__data">
+                {{ $contact->category->content }}
+            </td>
+
+            <td class="admin-table__item">
+                <a class="detail-btn" href="#">詳細</a> {{-- admin__detail-btn から detail-btn へ修正 --}}
+            </td>
         </tr>
         @endforeach
     </table>
