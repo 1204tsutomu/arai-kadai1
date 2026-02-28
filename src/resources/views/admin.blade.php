@@ -129,6 +129,80 @@
         cursor: pointer;
         border-radius: 2px;
     }
+
+    /* ヘッダー全体を整列させる */
+    .header__inner {
+        display: flex;
+        justify-content: center;
+        /* タイトルを中央に */
+        align-items: center;
+        position: relative;
+        /* ログアウトボタンを右端に固定するための基準 */
+        width: 100%;
+        padding: 20px 0;
+    }
+
+    /* タイトルロゴ */
+    .header__logo {
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    /* ログアウトボタンを右端へ強制移動 */
+    .header-nav {
+        position: absolute;
+        right: 50px;
+    }
+
+    .header-nav__button {
+        background: none;
+        border: none;
+        color: #8b7969;
+        cursor: pointer;
+        text-transform: lowercase;
+        /* デザインに合わせて小文字に */
+    }
+
+    .header__inner {
+        position: relative;
+        /* 基準点にする */
+        display: flex;
+        justify-content: center;
+    }
+
+    .header-nav {
+        position: absolute;
+        right: 50px;
+        /* 右端から50pxの位置に固定 */
+    }
+
+    /* ログアウトボタン自体のデザイン */
+    .header-nav__button {
+        background-color: #8b7969;
+        /* 背景をロゴと同じ茶色にして重厚感を出す */
+        color: #fff;
+        /* 文字を白抜きにしてくっきりさせる */
+        border: none;
+        /* 枠線はなしでスッキリ */
+        padding: 10px 25px;
+        /* 上下10px、左右25pxに広げてサイズアップ */
+        cursor: pointer;
+        font-size: 16px;
+        /* 文字サイズを16pxに大きく */
+        font-weight: bold;
+        /* 太字にして存在感を出す */
+        border-radius: 4px;
+        /* 角を少し丸める */
+        transition: background-color 0.3s;
+        line-height: 1;
+        /* 文字を中央に安定させる */
+    }
+
+    /* マウスを乗せた時に少し色を変える（反応を良くする） */
+    .header-nav__button:hover {
+        background-color: #a29182;
+        /* 少しだけ明るい茶色に */
+    }
 </style>
 @endsection
 
@@ -257,7 +331,10 @@
                         </div>
                     </div>
                 </div>
-            </td> {{-- ← これが抜けているので追加 --}}
-        </tr>
+            </td> {{-- ここで詳細ボタンの列は終了 --}}
+        </tr> {{-- ここで行が終了 --}}
         @endforeach
     </table>
+
+</div> {{-- ← ★重要！admin__contentを閉じる。これが無いとタイトルが左下に行きます --}}
+@endsection

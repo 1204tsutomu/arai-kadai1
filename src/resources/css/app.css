@@ -1,0 +1,48 @@
+.header__inner {
+    display: flex;
+    justify-content: center;
+    /* 中央に寄せる */
+    align-items: center;
+    position: relative;
+    padding: 20px;
+}
+
+.header__logo {
+    font-size: 24px;
+    font-family: 'Garamond', serif;
+    /* それっぽいフォントに */
+    text-decoration: none;
+    color: #8b7969;
+}
+
+.header-nav {
+    position: absolute;
+    right: 40px;
+    /* ログアウトボタンだけ右端に置く */
+}
+
+/* ログアウトボタン自体のデザイン */
+.header-nav__button {
+    background-color: #fff;
+    /* 背景を白に */
+    color: #8b7969;
+    /* 文字色をロゴに合わせる */
+    border: 1px solid #e0dfde;
+    /* 詳細ボタンと同じ枠線 */
+    padding: 5px 15px;
+    /* 内側に余白を作る */
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 2px;
+    /* ほんの少し角を丸める */
+    transition: all 0.3s;
+    /* ふわっと変化させる */
+}
+
+/* マウスを乗せた時（ホバー）の設定 */
+.header-nav__button:hover {
+    background-color: #8b7969;
+    /* 背景を茶色に */
+    color: #fff;
+    /* 文字を白に */
+}
