@@ -40,13 +40,14 @@
     font-weight: normal;
 }
 /* --- 3. 項目名と入力欄を横に並べる (ここが肝！) --- */
+/* --- 3. 項目名と入力欄を横に並べる --- */
 .form__group {
     display: flex;
     margin-bottom: 30px;
     align-items: flex-start;
-    /* 上揃え */
+    padding: 0 40px;
+    /* ★これを追加！左右に40pxの余白が生まれます */
 }
-
 .form__group-title {
     width: 30%;
     /* 左側(ラベル)の幅を固定 */
