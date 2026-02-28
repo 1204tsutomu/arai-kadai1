@@ -13,7 +13,7 @@
 
 <body>
     <header class="header">
-        < class="header__inner">
+        <div class="header__inner">
             {{-- テキストを見本通りに修正 --}}
             <a class="header__logo" href="/admin">Fashionably Late</a>
 
@@ -33,7 +33,7 @@
                 </ul>
             </nav>
 
-            </div>
+        </div>
     </header>
 
     <main>

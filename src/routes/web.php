@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AuthorController;
+use App\Http\Controllers\AdminController;
 
 
 
@@ -23,4 +24,5 @@ Route::middleware('auth')->group(function () {
     Route::get('/author/{author}', [AuthorController::class, 'bind']);
     Route::get('/find', [AuthorController::class, 'find']);
     Route::post('/find', [AuthorController::class, 'search']);
+    Route::delete('/admin/delete/{id}', [AdminController::class, 'destroy'])->name('admin.delete');
 });

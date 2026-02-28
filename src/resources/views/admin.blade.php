@@ -3,76 +3,53 @@
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
 <style>
-    /* テーブルの各列の幅を、現在の順番に合わせて再定義 */
-    .admin__table th:nth-child(1),
-    .admin__table td:nth-child(1) {
-        width: 10%;
-    }
-
-    /* 詳細 */
-    .admin__table th:nth-child(2),
-    .admin__table td:nth-child(2) {
-        width: 20%;
-    }
-
-    /* お名前 */
-    .admin__table th:nth-child(3),
-    .admin__table td:nth-child(3) {
-        width: 10%;
-    }
-
-    /* 性別 */
-    .admin__table th:nth-child(4),
-    .admin__table td:nth-child(4) {
-        width: 30%;
-    }
-
-    /* メールアドレス */
-    .admin__table th:nth-child(5),
-    .admin__table td:nth-child(5) {
-        width: 30%;
-    }
-
-    /* お問い合わせの種類 */
-
-    /* テキストが重ならないように調整 */
-    .admin__table th,
-    .admin__table td {
-        text-align: left;
-        padding: 15px 10px;
-        white-space: nowrap;
-        /* 改行を防ぐ */
-    }
-
-    /* 「詳細」ボタンのスタイルを整える */
-    .admin__detail-btn {
-        background: #f4f4f4;
-        border: 1px solid #ccc;
-        padding: 5px 10px;
-        text-decoration: none;
-        color: #8b7969;
-        /* 元のデザインに近い色 */
-        border-radius: 2px;
-    }
-
-    /* テーブルの横幅を固定せず、コンテンツに合わせるか均等にする */
+    /* 1. テーブル全体の基本設定 */
     .admin__table {
         width: 100%;
         border-collapse: collapse;
         margin-top: 20px;
-        table-layout: auto;
-        /* コンテンツ量に合わせて自動調整 */
+        table-layout: fixed;
+        /* 幅を固定して安定させる */
     }
 
-    .admin__label,
+    .admin-table__header,
     .admin__data {
         padding: 15px;
         text-align: left;
         border-bottom: 1px solid #eee;
-        /* 見本に近い区切り線 */
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
-    /* 詳細ボタンを見本のスタイル（薄い枠線）に寄せる */
+    /* 2. 各列の幅（お好みで調整してください） */
+    .admin-table__header:nth-child(1) {
+        width: 15%;
+    }
+
+    /* お名前 */
+    .admin-table__header:nth-child(2) {
+        width: 10%;
+    }
+
+    /* 性別 */
+    .admin-table__header:nth-child(3) {
+        width: 25%;
+    }
+
+    /* メール */
+    .admin-table__header:nth-child(4) {
+        width: 30%;
+    }
+
+    /* 種類 */
+    .admin-table__header:nth-child(5) {
+        width: 20%;
+    }
+
+    /* ボタン */
+
+    /* 3. 詳細ボタンの見た目 */
     .admin__detail-btn {
         display: inline-block;
         padding: 5px 15px;
@@ -81,10 +58,76 @@
         color: #8b7969;
         text-decoration: none;
         font-size: 14px;
+        border-radius: 2px;
     }
 
     .admin__detail-btn:hover {
         background-color: #f8f8f8;
+    }
+
+    /* 4. 【重要】モーダルを隠し、画面中央に浮かせる設定 */
+    .modal-overlay {
+        display: none;
+        /* 普段は絶対に隠す */
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        z-index: 9999;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* 5. 詳細ボタンが押された時（URLが#modal-IDになった時）だけ表示 */
+    .modal-overlay:target {
+        display: flex;
+    }
+
+    /* 6. モーダルの白い窓 */
+    .modal-window {
+        background: #fff;
+        width: 600px;
+        max-width: 90%;
+        padding: 40px;
+        position: relative;
+        border-radius: 4px;
+        white-space: normal;
+        /* テーブルの改行禁止を解除 */
+    }
+
+    .modal-close {
+        position: absolute;
+        top: 10px;
+        right: 20px;
+        text-decoration: none;
+        color: #8b7969;
+        font-size: 30px;
+    }
+
+    /* 7. モーダル内のテーブル */
+    .modal-table {
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .modal-table th {
+        text-align: left;
+        width: 35%;
+        padding: 10px 0;
+    }
+
+    /* 8. 削除ボタン */
+    .delete-btn {
+        display: block;
+        margin: 30px auto 0;
+        background-color: #f44336;
+        color: #fff;
+        border: none;
+        padding: 10px 40px;
+        cursor: pointer;
+        border-radius: 2px;
     }
 </style>
 @endsection
@@ -162,10 +205,59 @@
             </td>
 
             <td class="admin-table__item">
-                <a class="detail-btn" href="#">詳細</a> {{-- admin__detail-btn から detail-btn へ修正 --}}
-            </td>
+                {{-- ボタンのリンク先をモーダルのIDにする --}}
+                <a class="admin__detail-btn" href="#modal-{{ $contact->id }}">詳細</a>
+
+                {{-- モーダル本体をここに隠しておく --}}
+                <div id="modal-{{ $contact->id }}" class="modal-overlay">
+                    <div class="modal-window">
+                        <a href="#" class="modal-close">×</a>
+                        <div class="modal-inner">
+                            <table class="modal-table">
+                                <tr>
+                                    <th>お名前</th>
+                                    <td>{{ $contact->last_name }} {{ $contact->first_name }}</td>
+                                </tr>
+                                <tr>
+                                    <th>性別</th>
+                                    <td>{{ $contact->gender == 1 ? '男性' : ($contact->gender == 2 ? '女性' : 'その他') }}</td>
+                                </tr>
+                                <tr>
+                                    <th>メールアドレス</th>
+                                    <td>{{ $contact->email }}</td>
+                                </tr>
+                                <tr>
+                                    <th>電話番号</th>
+                                    <td>{{ $contact->tel }}</td>
+                                </tr>
+                                <tr>
+                                    <th>住所</th>
+                                    <td>{{ $contact->address }}</td>
+                                </tr>
+                                <tr>
+                                    <th>建物名</th>
+                                    <td>{{ $contact->building }}</td>
+                                </tr>
+                                <tr>
+                                    <th>お問い合わせの種類</th>
+                                    <td>{{ $contact->category->content }}</td>
+                                </tr>
+                                <tr>
+                                    <th>お問い合わせ内容</th>
+                                    <td>{{ $contact->detail }}</td>
+                                </tr>
+                            </table>
+
+                            {{-- 削除機能 (FN026) --}}
+                            <form action="/admin/delete/{{ $contact->id }}" method="POST" class="delete-form">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="delete-btn" onclick="return confirm('本当に削除しますか？')">削除</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </td> {{-- ← これが抜けているので追加 --}}
         </tr>
         @endforeach
     </table>
-</div>
-@endsection
