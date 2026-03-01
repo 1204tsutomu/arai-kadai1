@@ -17,20 +17,22 @@ class CreateNewUser implements CreatesNewUsers
      *
      * @param  array<string, string>  $input
      */
-    public function create(array $input): User
+    // app/Actions/Fortify/CreateNewUser.php
+
+    public function create(array $input)
     {
         Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],
-            'email' => [
-                'required',
-                'string',
-                'email',
-                'max:255',
-                Rule::unique(User::class),
-            ],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => $this->passwordRules(),
+        ], [
+            'name.required' => 'お名前を入力してください',
+            'email.required' => 'メールアドレスを入力してください',
+            'email.unique' => 'このメールアドレスは登録済みです',
+            'password.required' => 'パスワードを入力してください',
         ])->validate();
 
+        // ここから下が保存処理です！忘れずに復活させましょう
         return User::create([
             'name' => $input['name'],
             'email' => $input['email'],
