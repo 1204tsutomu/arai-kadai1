@@ -35,6 +35,7 @@ class CreateContactsTable extends Migration
 
             // 教材の'content'ではなく'detail'（お問い合わせ内容）
             $table->text('detail');
+            $table->string('image_file')->nullable(); // ここに追加！
 
             $table->timestamps();
         });

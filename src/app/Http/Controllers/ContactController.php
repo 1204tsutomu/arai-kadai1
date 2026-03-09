@@ -22,19 +22,25 @@ class ContactController extends Controller
         $contact['tel'] = $request->tel1 . $request->tel2 . $request->tel3;
         $contact['building_name'] = $request->building;
 
+        // ★ 画像アップロード処理を追加
+        if ($request->hasFile('image_file')) {
+            // 画像を storage/app/public/img に保存し、そのパスを取得
+            $path = $request->file('image_file')->store('img', 'public');
+            // ファイル名（パス）を $contact 配列にセット
+            $contact['image_file'] = $path;
+        }
+
         $category = Category::find($request->category_id);
         $contact['category_content'] = $category ? $category->content : '';
 
         return view('confirm', compact('contact'));
     }
-    // 修正前：public function confirm(ContactRequest $request)
-    // --- 以下の store メソッドを admin の上あたりに追加してください ---
+
     public function store(Request $request)
     {
-        // building_name など、hiddenで送られたデータを丸ごと保存
+        // 修正ポイント：$request->all() には image_file（パス文字列）が含まれているのでそのまま保存可能
         Contact::create($request->all());
 
-        // 保存が終わったらサンクス画面へ
         return view('thanks');
     }
 

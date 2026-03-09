@@ -7,6 +7,7 @@
 ```
 
 git cloneコマンドでリポジトリからダウンロード
+ダウンロードしたディレクトリの中のsrcディレクトリにある
 「.env.example」をコピーして「.env」を作成しDBの設定を変更
 
 cp .env.example .env

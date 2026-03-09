@@ -23,7 +23,8 @@
                 <h2>Contact</h2>
             </div>
 
-            <form class="form" action="{{ route('confirm') }}" method="post" novalidate>
+            {{-- フォームに enctype を追加 --}}
+            <form class="form" action="{{ route('confirm') }}" method="post" enctype="multipart/form-data" novalidate>
                 @csrf
 
                 {{-- 1. お名前 --}}
@@ -43,7 +44,6 @@
                         </div>
                     </div>
                 </div>
-
 
                 {{-- 2. 性別 --}}
                 <div class="form__group">
@@ -109,7 +109,7 @@
                     </div>
                 </div>
 
-                {{-- 5.5 建物名 (任意項目) --}}
+                {{-- 5.5 建物名 --}}
                 <div class="form__group">
                     <div class="form__group-title">
                         <span class="form__label--item">建物名</span>
@@ -118,7 +118,6 @@
                         <div class="form__input--text">
                             <input type="text" name="building" placeholder="例: 千駄ヶ谷マンション101" value="{{ old('building') }}" />
                         </div>
-                        {{-- 任意項目なのでエラー表示は不要ですが、一応 old() は効かせておきます --}}
                     </div>
                 </div>
 
@@ -152,6 +151,21 @@
                             <textarea name="detail" placeholder="資料をいただきたいです">{{ old('detail') }}</textarea>
                         </div>
                         @error('detail') <p class="form__error">{{ $message }}</p> @enderror
+                    </div>
+                </div>
+
+                {{-- 8. 画像ファイル --}}
+                <div class="form__group">
+                    <div class="form__group-title">
+                        <span class="form__label--item">画像ファイル</span>
+                    </div>
+                    <div class="form__group-content">
+                        <div class="form__input--file">
+                            <input type="file" name="image_file" accept="image/*">
+                        </div>
+                        <div class="form__error">
+                            @error('image_file') <p class="form__error">{{ $message }}</p> @enderror
+                        </div>
                     </div>
                 </div>
 

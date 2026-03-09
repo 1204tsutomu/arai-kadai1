@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
+use App\Http\Requests\RegisterRequest;
 
 class CreateNewUser implements CreatesNewUsers
 {
@@ -19,24 +20,14 @@ class CreateNewUser implements CreatesNewUsers
      */
     // app/Actions/Fortify/CreateNewUser.php
 
-    public function create(array $input)
+    public function create(array $input): User
     {
-        Validator::make($input, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => $this->passwordRules(),
-        ], [
-            'name.required' => 'お名前を入力してください',
-            'email.required' => 'メールアドレスを入力してください',
-            'email.unique' => 'このメールアドレスは登録済みです',
-            'password.required' => 'パスワードを入力してください',
-        ])->validate();
+        $validatedData = app(RegisterRequest::class)->validated();
 
-        // ここから下が保存処理です！忘れずに復活させましょう
         return User::create([
-            'name' => $input['name'],
-            'email' => $input['email'],
-            'password' => Hash::make($input['password']),
+            'name' => $validatedData['name'],
+            'email' => $validatedData['email'],
+            'password' => Hash::make($validatedData['password']),
         ]);
     }
 }

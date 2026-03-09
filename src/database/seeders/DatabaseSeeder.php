@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use App\Models\Contact;
 use App\Models\Category;
+use App\Models\Channel;
 use Illuminate\Support\Facades\Schema;
 
 class DatabaseSeeder extends Seeder
@@ -47,5 +48,6 @@ class DatabaseSeeder extends Seeder
                 return Category::inRandomOrder()->first()->id;
             }
         ]);
+        $this->call(ChannelsTableSeeder::class);
     }
 }

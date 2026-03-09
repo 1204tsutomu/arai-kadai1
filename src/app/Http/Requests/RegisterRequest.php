@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AdminContactRequest extends FormRequest
+class RegisterRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,17 +21,18 @@ class AdminContactRequest extends FormRequest
         return [
             'name'  => 'required|max:255',
             'email' => 'required|email|max:255',
-            'detail' => 'required|string',
+            'password' => 'required|string',
         ];
     }
 
     public function messages()
     {
         return [
-            'name.required'   => '管理用：お名前の入力は必須です。',
-            'email.required'  => 'メールアドレスを入力してください。',
+            'name.required'   => 'お名前の入力は必須です。',
+            'email.required'  => 'メールアドレスも必須です。',
             'email.email'     => '正しいメール形式で入力してください。',
-            'detail.required' => '詳細内容を入力してください。',
+            'password.required' => '必須事項です',
+            'password.string' => '英数記号で入力してください',
         ];
     }
 }

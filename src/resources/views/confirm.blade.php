@@ -24,6 +24,7 @@
 
             <form class="form" action="{{ route('store') }}" method="post">
                 @csrf
+                <input type="hidden" name="image_file" value="{{ $contact['image_file'] ?? '' }}">
                 <div class="confirm-table">
                     <table class="confirm-table__inner">
                         {{-- お名前 --}}
@@ -89,6 +90,16 @@
                             <td class="confirm-table__text">
                                 <span>{{ $contact['detail'] }}</span>
                                 <input type="hidden" name="detail" value="{{ $contact['detail'] }}" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>画像ファイル</th>
+                            <td>
+                                @if(!empty($contact['image_file']))
+                                <img src="{{ asset('storage/' . $contact['image_file']) }}" width="200">
+                                @else
+                                <span>画像なし</span>
+                                @endif
                             </td>
                         </tr>
                     </table>
