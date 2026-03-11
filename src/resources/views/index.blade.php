@@ -155,6 +155,7 @@
                 </div>
 
                 {{-- 8. 画像ファイル --}}
+                {{-- 8. 画像ファイル --}}
                 <div class="form__group">
                     <div class="form__group-title">
                         <span class="form__label--item">画像ファイル</span>
@@ -169,12 +170,29 @@
                     </div>
                 </div>
 
+                {{-- 9. どこで知りましたか？ --}}
+                <div class="form__group">
+                    <div class="form__group-title">
+                        <span class="form__label--item">どこで知りましたか？</span>
+                    </div>
+                    <div class="form__group-content">
+                        <div class="form__input--checkbox" style="display: flex; gap: 15px; flex-wrap: wrap; align-items: center; height: 100%;">
+                            @foreach ($channels as $channel)
+                            <label style="display: flex; align-items: center; gap: 5px; cursor: pointer; margin-bottom: 0;">
+                                <input type="checkbox" name="channel_ids[]" value="{{ $channel->id }}"
+                                    {{ is_array(old('channel_ids')) && in_array($channel->id, old('channel_ids')) ? 'checked' : '' }}>
+                                {{ $channel->content }}
+                            </label>
+                            @endforeach
+                        </div>
+                        @error('channel_ids')
+                        <div class="form__error">
+                            <p>{{ $message }}</p>
+                        </div>
+                        @enderror
+                    </div>
+                </div>
+
                 <div class="form__button">
                     <button class="form__button-submit" type="submit">確認画面へ</button>
                 </div>
-            </form>
-        </div>
-    </main>
-</body>
-
-</html>

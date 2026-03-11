@@ -24,7 +24,9 @@
 
             <form class="form" action="{{ route('store') }}" method="post">
                 @csrf
+                {{-- 画像パスの引き継ぎ --}}
                 <input type="hidden" name="image_file" value="{{ $contact['image_file'] ?? '' }}">
+
                 <div class="confirm-table">
                     <table class="confirm-table__inner">
                         {{-- お名前 --}}
@@ -92,9 +94,30 @@
                                 <input type="hidden" name="detail" value="{{ $contact['detail'] }}" />
                             </td>
                         </tr>
-                        <tr>
-                            <th>画像ファイル</th>
-                            <td>
+                        {{-- どこで知りましたか？ --}}
+                        <tr class="confirm-table__row">
+                            <th class="confirm-table__header">どこで知りましたか？</th>
+                            <td class="confirm-table__text">
+                                <span>
+                                    @if(!empty($contact['channels']))
+                                    @foreach($contact['channels'] as $channel)
+                                    {{ $channel['content'] }}@if(!$loop->last)、@endif
+                                    @endforeach
+                                    @else
+                                    選択なし
+                                    @endif
+                                </span>
+                                @if(!empty($contact['channel_ids']))
+                                @foreach($contact['channel_ids'] as $id)
+                                <input type="hidden" name="channel_ids[]" value="{{ $id }}" />
+                                @endforeach
+                                @endif
+                            </td>
+                        </tr>
+                        {{-- 画像ファイル --}}
+                        <tr class="confirm-table__row">
+                            <th class="confirm-table__header">画像ファイル</th>
+                            <td class="confirm-table__text">
                                 @if(!empty($contact['image_file']))
                                 <img src="{{ asset('storage/' . $contact['image_file']) }}" width="200">
                                 @else

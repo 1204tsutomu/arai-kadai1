@@ -10,4 +10,9 @@ class Channel extends Model
     use HasFactory;
 
     protected $fillable = ['content'];
+
+    public function contacts()
+    {
+        return $this->belongsToMany(Contact::class);
+    }
 }
